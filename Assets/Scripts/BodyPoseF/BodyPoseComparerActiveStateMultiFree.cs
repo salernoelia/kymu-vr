@@ -12,7 +12,7 @@ namespace BodyPoseF
     /// You can select which joints to monitor and what the maximum angle delta between each joint should be.
     /// If all joints are within this maximum range for ANY of the reference poses, the IActiveState becomes Active.
     /// </summary>
-    public class BodyPoseComparerActiveStateMultiFree :
+    public sealed class BodyPoseComparerActiveStateMultiFree :
         MonoBehaviour, IActiveState, ITimeConsumer
     {
         public struct BodyPoseComparerFeatureState
@@ -30,20 +30,16 @@ namespace BodyPoseF
         [Serializable]
         public class JointComparerConfig
         {
-            [Tooltip("The joint to compare from each Body Pose")]
-            public BodyJointId Joint = BodyJointId.Body_Head;
-
-            [Min(0)]
-            [Tooltip("The maximum angle that two joint rotations " +
-                "can be from each other to be considered equal.")]
-            public float MaxDelta = 30f;
-
-            [Tooltip("The width of the threshold when transitioning " +
-                "states. " + nameof(Width) + " / 2 is added to " +
-                nameof(MaxDelta) + " when leaving Active state, and " +
-                "subtracted when entering.")]
-            [Min(0)]
-            public float Width = 4f;
+            public BodyJointId Joint;
+            [Min(0)] public float MaxDelta;
+            [Min(0)] public float Width;
+            
+            public JointComparerConfig(BodyJointId joint, float maxDelta, float width)
+            {
+                Joint = joint;
+                MaxDelta = maxDelta;
+                Width = width;
+            }
         }
 
         /// <summary>
@@ -66,18 +62,24 @@ namespace BodyPoseF
         /// A list of JointComparerConfigs which contains the parameters to test.
         /// </summary>
         [SerializeField]
-        private List<JointComparerConfig> _configs =
-            new List<JointComparerConfig>()
-            {
-                new JointComparerConfig()
-            };
+        private List<JointComparerConfig> _configs = new List<JointComparerConfig>
+        {
+            new JointComparerConfig(BodyJointId.Body_Head, 30f, 4f),
+            new JointComparerConfig(BodyJointId.Body_LeftArmUpper, 30f, 4f),
+            new JointComparerConfig(BodyJointId.Body_LeftArmLower, 30f, 4f),
+            new JointComparerConfig(BodyJointId.Body_LeftHandWrist, 36f, 4f),
+            new JointComparerConfig(BodyJointId.Body_RightArmUpper, 30f, 4f),
+            new JointComparerConfig(BodyJointId.Body_RightArmLower, 30f, 4f),
+            new JointComparerConfig(BodyJointId.Body_RightHandWrist, 36f, 4f)
+        };
+
+
 
         /// <summary>
         /// A new state must be maintaned for at least this many seconds before the Active property changes.
         /// Prevents unwanted momentary activations/deactivations of the IActiveState.
         /// </summary>
-        [Tooltip("A new state must be maintaned for at least this " +
-            "many seconds before the Active property changes.")]
+        [Tooltip("A new state must be maintaned for at least this many seconds before the Active property changes.")]
         [SerializeField]
         private float _minTimeInState = 0.05f;
 
@@ -103,7 +105,7 @@ namespace BodyPoseF
         private bool _internalActive;
         private float _lastStateChangeTime;
 
-        protected virtual void Awake()
+        private void Awake()
         {
             SourcePose = _sourcePose as IBodyPose;
             ReferencePoses.Clear();
@@ -113,7 +115,7 @@ namespace BodyPoseF
             }
         }
 
-        protected virtual void Start()
+        private void Start()
         {
             this.AssertField(SourcePose, nameof(SourcePose));
             this.AssertCollectionField(ReferencePoses, nameof(ReferencePoses), 
