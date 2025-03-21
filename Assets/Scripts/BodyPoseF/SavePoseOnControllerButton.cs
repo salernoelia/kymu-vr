@@ -6,7 +6,7 @@ namespace BodyPoseF
     public class SavePoseOnControllerButton : MonoBehaviour
     {
         [Tooltip("Reference to the PoseFromBody script that handles pose saving")]
-        [SerializeField] private BodyPoseF.PoseFromBody poseFromBody;
+        [SerializeField] private Oculus.Interaction.Body.PoseDetection.PoseFromBody poseFromBody;
     
         [Tooltip("Reference to the AudioTrigger script to play confirmation sound")]
         [SerializeField] private AudioTrigger audioTrigger;
@@ -26,12 +26,19 @@ namespace BodyPoseF
         private bool canSave = true;
         private float lastSaveTime = 0f;
 
+        private BodyPoseF.SavePoseFromBody savePoseFromBody;
+
         void Start()
         {
             // Validate references
             if (poseFromBody == null)
             {
                 Debug.LogError("PoseFromBody reference is missing! Please assign it in the inspector.");
+            }
+
+            if (savePoseFromBody == null)
+            {
+                Debug.LogError("SavePoseFromBody reference is missing! Please assign it in the inspector.");
             }
         
             if (audioTrigger == null)
@@ -77,7 +84,7 @@ namespace BodyPoseF
             if (poseFromBody != null)
             {
                 // Fix: Use the instance variable instead of the class name
-                poseFromBody.SavePoseToFile();
+                savePoseFromBody.SavePoseToFile();
                 Debug.Log("Pose saved!");
 
                 // Play confirmation audio

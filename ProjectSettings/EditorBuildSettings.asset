@@ -6,9 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/BaseScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/PingPongScene.unity
+    guid: 8f3bc3f5c100f4f2482207ddd3d9f885
+  - enabled: 1
+    path: Assets/Scenes/Obsolete/PoseRecordingScene.unity
+    guid: 73af1a20b92af8341ae3e1c387125e52
+  - enabled: 1
+    path: Assets/Scenes/RowingScene.unity
+    guid: 3834a8a7563d19542b42b0172246fd3d
+  - enabled: 1
+    path: Assets/Scenes/SlingShotScene.unity
+    guid: 185b21fc912964a8fba8fb10d8154f46
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 814d34982f5e66f4386248151ad8750f, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 06acbb568d7922444b15a95ad2325006, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     com.unity.renderstreaming.settings: {fileID: 11400000, guid: c05bfa8adc2070e418f610821db2d950, type: 2}

@@ -1,0 +1,1488 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c960480e1988e154cb5a78695fb9f17f, type: 3}
+  m_Name: BodyPose-20250321-221148
+  m_EditorClassIdentifier: 
+  _serializedVersion: 1
+  _jointData:
+  - JointId: Body_Root
+    LocalPose:
+      Position:
+        x: 0
+        y: 0
+        z: 0
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1
+    RootPose:
+      Position:
+        x: 0
+        y: 0
+        z: 0
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1
+  - JointId: Body_Hips
+    LocalPose:
+      Position:
+        x: 0
+        y: 0.69582427
+        z: 0
+      Rotation:
+        x: 0.6128406
+        y: -0.7233919
+        z: -0.19919927
+        w: 0.24789217
+    RootPose:
+      Position:
+        x: 0
+        y: 0.69582427
+        z: 0
+      Rotation:
+        x: 0.6128406
+        y: -0.7233919
+        z: -0.19919927
+        w: 0.24789217
+  - JointId: Body_SpineLower
+    LocalPose:
+      Position:
+        x: -0.015449629
+        y: -0.024859667
+        z: 0.0000000189383
+      Rotation:
+        x: -0.000058105274
+        y: -0.00800938
+        z: -0.030192412
+        w: 0.99951226
+    RootPose:
+      Position:
+        x: 0.02153252
+        y: 0.7068349
+        z: -0.016486645
+      Rotation:
+        x: 0.63277256
+        y: -0.7065096
+        z: -0.21153702
+        w: 0.23599857
+  - JointId: Body_SpineMiddle
+    LocalPose:
+      Position:
+        x: -0.083959535
+        y: 0.011790637
+        z: 5.3453153e-10
+      Rotation:
+        x: 0.006230194
+        y: -0.002578465
+        z: -0.104988955
+        w: 0.99445075
+    RootPose:
+      Position:
+        x: 0.019539762
+        y: 0.79158115
+        z: -0.014962126
+      Rotation:
+        x: 0.7043616
+        y: -0.6380812
+        z: -0.23237024
+        w: 0.20671587
+  - JointId: Body_SpineUpper
+    LocalPose:
+      Position:
+        x: -0.08428929
+        y: -0.016482506
+        z: -3.884284e-10
+      Rotation:
+        x: 0.029621074
+        y: 0.005058187
+        z: -0.0033420746
+        w: 0.99954313
+    RootPose:
+      Position:
+        x: 0.026221681
+        y: 0.8770969
+        z: -0.019293722
+      Rotation:
+        x: 0.71347064
+        y: -0.6412729
+        z: -0.21049143
+        w: 0.18820836
+  - JointId: Body_Chest
+    LocalPose:
+      Position:
+        x: -0.14041626
+        y: 0.0134947235
+        z: -9.66746e-10
+      Rotation:
+        x: 0.009728353
+        y: 0.008771666
+        z: 0.0011154799
+        w: 0.99991375
+    RootPose:
+      Position:
+        x: 0.0024558736
+        y: 1.0152717
+        z: -0.0037456586
+      Rotation:
+        x: 0.7163709
+        y: -0.6424101
+        z: -0.19776642
+        w: 0.187111
+  - JointId: Body_Neck
+    LocalPose:
+      Position:
+        x: -0.09077666
+        y: 0.043540746
+        z: -0.000000049442658
+      Rotation:
+        x: -0.016948313
+        y: -0.047889326
+        z: -0.16040279
+        w: 0.98574364
+    RootPose:
+      Position:
+        x: -0.04314741
+        y: 1.1009872
+        z: 0.02288865
+      Rotation:
+        x: 0.7965602
+        y: -0.52395254
+        z: -0.2701544
+        w: 0.13409787
+  - JointId: Body_Head
+    LocalPose:
+      Position:
+        x: -0.05401155
+        y: -0.00000006718969
+        z: 0.000000018602424
+      Rotation:
+        x: 0.000000011395807
+        y: -0.000000016527375
+        z: 0.0369066
+        w: 0.9993189
+    RootPose:
+      Position:
+        x: -0.059619855
+        y: 1.1499851
+        z: 0.038544744
+      Rotation:
+        x: 0.7766803
+        y: -0.55299395
+        z: -0.26502126
+        w: 0.14397699
+  - JointId: Body_LeftShoulder
+    LocalPose:
+      Position:
+        x: -0.040597595
+        y: 0.07861724
+        z: 0.02156048
+      Rotation:
+        x: 0.07563719
+        y: 0.76664746
+        z: 0.042950902
+        w: 0.63614947
+    RootPose:
+      Position:
+        x: -0.07929146
+        y: 1.0471178
+        z: 0.020685542
+      Rotation:
+        x: 0.5938965
+        y: -0.31094792
+        z: 0.48002157
+        w: 0.56584257
+  - JointId: Body_LeftScapula
+    LocalPose:
+      Position:
+        x: -0.12461475
+        y: -0.01729053
+        z: -0.028471423
+      Rotation:
+        x: -0.04074517
+        y: 0.048049346
+        z: -0.12373471
+        w: 0.99031365
+    RootPose:
+      Position:
+        x: -0.11281652
+        y: 1.0559584
+        z: -0.10355749
+      Rotation:
+        x: 0.5804987
+        y: -0.22682051
+        z: 0.42122418
+        w: 0.6588961
+  - JointId: Body_LeftArmUpper
+    LocalPose:
+      Position:
+        x: -0.010513787
+        y: 0.00078005844
+        z: 0.022978174
+      Rotation:
+        x: -0.06664033
+        y: 0.5439704
+        z: -0.24413535
+        w: 0.8000334
+    RootPose:
+      Position:
+        x: -0.11478697
+        y: 1.0309
+        z: -0.10626656
+      Rotation:
+        x: 0.24675067
+        y: 0.29060566
+        z: 0.47679222
+        w: 0.79204273
+  - JointId: Body_LeftArmLower
+    LocalPose:
+      Position:
+        x: -0.20437305
+        y: -0.00035408128
+        z: 0.000002383532
+      Rotation:
+        x: 0.00000005903525
+        y: -0.000000055974887
+        z: -0.6836476
+        w: 0.7298124
+    RootPose:
+      Position:
+        x: -0.19150184
+        y: 0.84708095
+        z: -0.060507935
+      Rotation:
+        x: -0.018590078
+        y: 0.38077807
+        z: -0.19350922
+        w: 0.9040004
+  - JointId: Body_LeftHandWristTwist
+    LocalPose:
+      Position:
+        x: -0.18527494
+        y: -0.0022126222
+        z: -0.0016788141
+      Rotation:
+        x: -0.7535494
+        y: 0.016151749
+        z: 0.04913593
+        w: 0.6553536
+    RootPose:
+      Position:
+        x: -0.31108513
+        y: 0.91267073
+        z: 0.06492067
+      Rotation:
+        x: -0.6715566
+        y: 0.41087765
+        z: 0.20423675
+        w: 0.5817894
+  - JointId: Body_RightShoulder
+    LocalPose:
+      Position:
+        x: -0.040594153
+        y: 0.07861712
+        z: -0.021560565
+      Rotation:
+        x: 0.76847625
+        y: -0.06510928
+        z: -0.6355731
+        w: 0.035385963
+    RootPose:
+      Position:
+        x: -0.056706287
+        y: 1.0477176
+        z: 0.05741393
+      Rotation:
+        x: 0.56456196
+        y: 0.2684123
+        z: 0.32111362
+        w: -0.71141475
+  - JointId: Body_RightScapula
+    LocalPose:
+      Position:
+        x: 0.124614894
+        y: 0.01729063
+        z: 0.028478056
+      Rotation:
+        x: -0.041186783
+        y: 0.04360779
+        z: -0.123554334
+        w: 0.9905235
+    RootPose:
+      Position:
+        x: 0.03684352
+        y: 1.059037
+        z: 0.14549991
+      Rotation:
+        x: 0.5413461
+        y: 0.29137382
+        z: 0.44164318
+        w: -0.65345025
+  - JointId: Body_RightArmUpper
+    LocalPose:
+      Position:
+        x: 0.010513812
+        y: -0.00077968044
+        z: -0.02298376
+      Rotation:
+        x: -0.11822316
+        y: 0.5327388
+        z: -0.24041533
+        w: 0.8027537
+    RootPose:
+      Position:
+        x: 0.038536858
+        y: 1.0340909
+        z: 0.14927167
+      Rotation:
+        x: 0.20648926
+        y: -0.036281466
+        z: 0.8344732
+        w: -0.5096082
+  - JointId: Body_RightArmLower
+    LocalPose:
+      Position:
+        x: 0.20437011
+        y: 0.0003526667
+        z: -0.000000079633104
+      Rotation:
+        x: -0.000000013489638
+        y: -0.00000009369322
+        z: -0.6638276
+        w: 0.74788576
+    RootPose:
+      Position:
+        x: -0.041960806
+        y: 0.85704166
+        z: 0.2120486
+      Rotation:
+        x: 0.17851508
+        y: 0.1099389
+        z: 0.96238244
+        w: 0.17281757
+  - JointId: Body_RightHandWristTwist
+    LocalPose:
+      Position:
+        x: 0.18527445
+        y: 0.0022118783
+        z: 0.0016796305
+      Rotation:
+        x: -0.78267646
+        y: 0.013892162
+        z: 0.049821936
+        w: 0.620276
+    RootPose:
+      Position:
+        x: -0.20436792
+        y: 0.9241679
+        z: 0.27080512
+      Rotation:
+        x: -0.032423835
+        y: -0.69153476
+        z: 0.69407934
+        w: 0.19743909
+  - JointId: Body_LeftHandPalm
+    LocalPose:
+      Position:
+        x: -0.039907187
+        y: 0.0010610207
+        z: -0.0007201468
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 0.9999997
+    RootPose:
+      Position:
+        x: -0.36560136
+        y: 0.9347136
+        z: 0.10074448
+      Rotation:
+        x: 0.095488966
+        y: 0.29949254
+        z: -0.16186042
+        w: 0.9354074
+  - JointId: Body_LeftHandWrist
+    LocalPose:
+      Position:
+        x: -0.21312033
+        y: -0.0023040208
+        z: -0.010510755
+      Rotation:
+        x: 0.10738969
+        y: -0.063954264
+        z: 0.076615766
+        w: 0.98919517
+    RootPose:
+      Position:
+        x: -0.33494496
+        y: 0.9237273
+        z: 0.077642225
+      Rotation:
+        x: 0.095488966
+        y: 0.29949254
+        z: -0.16186042
+        w: 0.9354074
+  - JointId: Body_LeftHandThumbMetacarpal
+    LocalPose:
+      Position:
+        x: -0.0341614
+        y: 0.013125028
+        z: -0.033217847
+      Rotation:
+        x: 0.5015351
+        y: -0.3655761
+        z: 0.16107178
+        w: 0.7673802
+    RootPose:
+      Position:
+        x: -0.374048
+        y: 0.9534704
+        z: 0.07225779
+      Rotation:
+        x: 0.53148365
+        y: -0.20869726
+        z: -0.1586553
+        w: 0.8054807
+  - JointId: Body_LeftHandThumbProximal
+    LocalPose:
+      Position:
+        x: -0.03391382
+        y: 0.000000030541297
+        z: 0.000000056187577
+      Rotation:
+        x: -0.08185241
+        y: 0.05144866
+        z: -0.20689784
+        w: 0.9735743
+    RootPose:
+      Position:
+        x: -0.40330032
+        y: 0.9696617
+        z: 0.06657531
+      Rotation:
+        x: 0.5028498
+        y: -0.03879223
+        z: -0.31085315
+        w: 0.8056102
+  - JointId: Body_LeftHandThumbDistal
+    LocalPose:
+      Position:
+        x: -0.03524927
+        y: 0.00000016859535
+        z: 0.00000002839894
+      Rotation:
+        x: 0.08202294
+        y: -0.05932179
+        z: -0.012093802
+        w: 0.99479014
+    RootPose:
+      Position:
+        x: -0.43163118
+        y: 0.9886916
+        z: 0.07539209
+      Rotation:
+        x: 0.5483372
+        y: -0.10579607
+        z: -0.34562457
+        w: 0.75410706
+  - JointId: Body_LeftHandThumbTip
+    LocalPose:
+      Position:
+        x: -0.017495433
+        y: -0.00025246746
+        z: 0.0021150801
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1.0000004
+    RootPose:
+      Position:
+        x: -0.44579658
+        y: 0.9982066
+        z: 0.07980047
+      Rotation:
+        x: 0.5483372
+        y: -0.10579607
+        z: -0.34562457
+        w: 0.75410706
+  - JointId: Body_LeftHandIndexMetacarpal
+    LocalPose:
+      Position:
+        x: -0.03710724
+        y: 0.0080888495
+        z: -0.021522017
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 0.9999997
+    RootPose:
+      Position:
+        x: -0.3719325
+        y: 0.9462902
+        z: 0.08297239
+      Rotation:
+        x: 0.095488966
+        y: 0.29949254
+        z: -0.16186042
+        w: 0.9354074
+  - JointId: Body_LeftHandIndexProximal
+    LocalPose:
+      Position:
+        x: -0.06302546
+        y: -0.00045714513
+        z: -0.0030434807
+      Rotation:
+        x: 0.030500837
+        y: 0.03989149
+        z: -0.09194756
+        w: 0.99449664
+    RootPose:
+      Position:
+        x: -0.4221251
+        y: 0.9621841
+        z: 0.11775413
+      Rotation:
+        x: 0.10241344
+        y: 0.3390023
+        z: -0.25230372
+        w: 0.9005174
+  - JointId: Body_LeftHandIndexIntermediate
+    LocalPose:
+      Position:
+        x: -0.039561614
+        y: -0.000000046481503
+        z: -0.000000061998186
+      Rotation:
+        x: -0.02633816
+        y: 0.0027911703
+        z: -0.166734
+        w: 0.985646
+    RootPose:
+      Position:
+        x: -0.44755697
+        y: 0.97741413
+        z: 0.14395311
+      Rotation:
+        x: 0.021406444
+        y: 0.36037084
+        z: -0.38961452
+        w: 0.8472751
+  - JointId: Body_LeftHandIndexDistal
+    LocalPose:
+      Position:
+        x: -0.02535083
+        y: -0.0000003426846
+        z: -0.000000008765161
+      Rotation:
+        x: -0.016722232
+        y: 0.024968818
+        z: -0.061584566
+        w: 0.9976494
+    RootPose:
+      Position:
+        x: -0.45862707
+        y: 0.99375993
+        z: 0.15985696
+      Rotation:
+        x: -0.0052772746
+        y: 0.38851276
+        z: -0.43431708
+        w: 0.8126492
+  - JointId: Body_LeftHandIndexTip
+    LocalPose:
+      Position:
+        x: -0.012563454
+        y: -0.0015471203
+        z: -0.00065764494
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1
+    RootPose:
+      Position:
+        x: -0.46416214
+        y: 1.0019329
+        z: 0.16780886
+      Rotation:
+        x: -0.0052772746
+        y: 0.38851276
+        z: -0.43431708
+        w: 0.8126492
+  - JointId: Body_LeftHandMiddleMetacarpal
+    LocalPose:
+      Position:
+        x: -0.067240775
+        y: 0.0072289743
+        z: -0.0060675764
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 0.9999997
+    RootPose:
+      Position:
+        x: -0.38720965
+        y: 0.94863313
+        z: 0.113117516
+      Rotation:
+        x: 0.095488966
+        y: 0.29949254
+        z: -0.16186042
+        w: 0.9354074
+  - JointId: Body_LeftHandMiddleProximal
+    LocalPose:
+      Position:
+        x: -0.032527212
+        y: -0.004576339
+        z: 0.0042672902
+      Rotation:
+        x: -0.019361794
+        y: 0.097957574
+        z: -0.15725377
+        w: 0.982497
+    RootPose:
+      Position:
+        x: -0.4115859
+        y: 0.95119315
+        z: 0.13539794
+      Rotation:
+        x: 0.044465587
+        y: 0.40403077
+        z: -0.29097122
+        w: 0.8660933
+  - JointId: Body_LeftHandMiddleIntermediate
+    LocalPose:
+      Position:
+        x: -0.0447767
+        y: -0.00000016602728
+        z: -0.00000002495712
+      Rotation:
+        x: -0.01203892
+        y: 0.0027221497
+        z: -0.1414957
+        w: 0.9898619
+    RootPose:
+      Position:
+        x: -0.43416196
+        y: 0.97215235
+        z: 0.16789389
+      Rotation:
+        x: -0.022788594
+        y: 0.41208702
+        z: -0.40558472
+        w: 0.81557715
+  - JointId: Body_LeftHandMiddleDistal
+    LocalPose:
+      Position:
+        x: -0.028736629
+        y: -0.00000024486963
+        z: -0.000000108496444
+      Rotation:
+        x: -0.04762803
+        y: -0.0012481508
+        z: -0.0412283
+        w: 0.9980133
+    RootPose:
+      Position:
+        x: -0.44368467
+        y: 0.9917033
+        z: 0.18667881
+      Rotation:
+        x: -0.079083525
+        y: 0.428628
+        z: -0.41874844
+        w: 0.7966642
+  - JointId: Body_LeftHandMiddleTip
+    LocalPose:
+      Position:
+        x: -0.0143194515
+        y: -0.001184184
+        z: -0.0000207056
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1.0000002
+    RootPose:
+      Position:
+        x: -0.448446
+        y: 1.0014788
+        z: 0.19607127
+      Rotation:
+        x: -0.079083525
+        y: 0.428628
+        z: -0.41874844
+        w: 0.7966642
+  - JointId: Body_LeftHandRingMetacarpal
+    LocalPose:
+      Position:
+        x: -0.036273967
+        y: 0.0062749386
+        z: 0.015638351
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 0.9999997
+    RootPose:
+      Position:
+        x: -0.35227332
+        y: 0.93415856
+        z: 0.112148024
+      Rotation:
+        x: 0.095488966
+        y: 0.29949254
+        z: -0.16186042
+        w: 0.9354074
+  - JointId: Body_LeftHandRingProximal
+    LocalPose:
+      Position:
+        x: -0.05624157
+        y: 0.0005354687
+        z: 0.0025793817
+      Rotation:
+        x: -0.06619995
+        y: 0.11154899
+        z: -0.16974993
+        w: 0.9769131
+    RootPose:
+      Position:
+        x: -0.39392045
+        y: 0.9477591
+        z: 0.1475118
+      Rotation:
+        x: -0.0014229715
+        y: 0.42384645
+        z: -0.2864309
+        w: 0.8592495
+  - JointId: Body_LeftHandRingIntermediate
+    LocalPose:
+      Position:
+        x: -0.040676445
+        y: -0.00000001106544
+        z: -0.0000000016755457
+      Rotation:
+        x: -0.03599345
+        y: -0.0006109233
+        z: -0.106651895
+        w: 0.99364465
+    RootPose:
+      Position:
+        x: -0.4133078
+        y: 0.96783036
+        z: 0.17710653
+      Rotation:
+        x: -0.077720284
+        y: 0.43078563
+        z: -0.3609945
+        w: 0.8234478
+  - JointId: Body_LeftHandRingDistal
+    LocalPose:
+      Position:
+        x: -0.02771849
+        y: 0.0000000016881292
+        z: -0.000000028717363
+      Rotation:
+        x: -0.008183919
+        y: -0.029571934
+        z: -0.07555074
+        w: 0.99666995
+    RootPose:
+      Position:
+        x: -0.42351413
+        y: 0.98616564
+        z: 0.19521627
+      Rotation:
+        x: -0.12742198
+        y: 0.40208265
+        z: -0.41618058
+        w: 0.8055354
+  - JointId: Body_LeftHandRingTip
+    LocalPose:
+      Position:
+        x: -0.013676763
+        y: -0.002093899
+        z: 0.00079979835
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1.0000004
+    RootPose:
+      Position:
+        x: -0.4286173
+        y: 0.99533325
+        z: 0.20427112
+      Rotation:
+        x: -0.12742198
+        y: 0.40208265
+        z: -0.41618058
+        w: 0.8055354
+  - JointId: Body_LeftHandLittleMetacarpal
+    LocalPose:
+      Position:
+        x: -0.035541732
+        y: 0.00982575
+        z: 0.023989568
+      Rotation:
+        x: -0.20703594
+        y: 0.14034283
+        z: -0.018311808
+        w: 0.96804136
+    RootPose:
+      Position:
+        x: -0.3460115
+        y: 0.9349772
+        z: 0.11870597
+      Rotation:
+        x: -0.08399401
+        y: 0.4564585
+        z: -0.0984097
+        w: 0.88028735
+  - JointId: Body_LeftHandLittleProximal
+    LocalPose:
+      Position:
+        x: -0.047617737
+        y: 0.00000092991996
+        z: -0.0000022341062
+      Rotation:
+        x: 0.086158685
+        y: -0.006235043
+        z: -0.17821147
+        w: 0.9801927
+    RootPose:
+      Position:
+        x: -0.37286595
+        y: 0.9468794
+        z: 0.1561843
+      Rotation:
+        x: -0.08844568
+        y: 0.4184813
+        z: -0.29214203
+        w: 0.8553967
+  - JointId: Body_LeftHandLittleIntermediate
+    LocalPose:
+      Position:
+        x: -0.032044128
+        y: -0.00000017469887
+        z: 0.000000005405268
+      Rotation:
+        x: -0.047361244
+        y: 0.038319405
+        z: -0.0999488
+        w: 0.9931255
+    RootPose:
+      Position:
+        x: -0.38821685
+        y: 0.9652668
+        z: 0.17746994
+      Rotation:
+        x: -0.15898235
+        y: 0.45337903
+        z: -0.35919908
+        w: 0.8000924
+  - JointId: Body_LeftHandLittleDistal
+    LocalPose:
+      Position:
+        x: -0.021186588
+        y: 0.000000014787851
+        z: 0.00000008005015
+      Rotation:
+        x: 0.00086323573
+        y: -0.04910046
+        z: -0.039432056
+        w: 0.9980146
+    RootPose:
+      Position:
+        x: -0.3952263
+        y: 0.9804988
+        z: 0.19042087
+      Rotation:
+        x: -0.1934906
+        y: 0.40661502
+        z: -0.38262057
+        w: 0.8067385
+  - JointId: Body_LeftHandLittleTip
+    LocalPose:
+      Position:
+        x: -0.010509325
+        y: -0.0008328393
+        z: 0.0010389753
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 0.9999999
+    RootPose:
+      Position:
+        x: -0.39873102
+        y: 0.98811483
+        z: 0.19689634
+      Rotation:
+        x: -0.1934906
+        y: 0.40661502
+        z: -0.38262057
+        w: 0.8067385
+  - JointId: Body_RightHandPalm
+    LocalPose:
+      Position:
+        x: 0.039907172
+        y: -0.0010611458
+        z: 0.00072009023
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 0.9999999
+    RootPose:
+      Position:
+        x: -0.2710088
+        y: 0.95628834
+        z: 0.31033346
+      Rotation:
+        x: 0.25059843
+        y: 0.2196231
+        z: 0.9387743
+        w: 0.087571904
+  - JointId: Body_RightHandWrist
+    LocalPose:
+      Position:
+        x: 0.22821894
+        y: -0.0003837999
+        z: 0.012419937
+      Rotation:
+        x: 0.13582851
+        y: -0.04525899
+        z: 0.066303514
+        w: 0.98747456
+    RootPose:
+      Position:
+        x: -0.23715018
+        y: 0.9441262
+        z: 0.29301572
+      Rotation:
+        x: 0.25059843
+        y: 0.2196231
+        z: 0.9387743
+        w: 0.087571904
+  - JointId: Body_RightHandThumbMetacarpal
+    LocalPose:
+      Position:
+        x: 0.040104546
+        y: -0.026182953
+        z: 0.021187587
+      Rotation:
+        x: 0.7302564
+        y: -0.33646473
+        z: -0.17424594
+        w: 0.5684676
+    RootPose:
+      Position:
+        x: -0.2593956
+        y: 0.98619705
+        z: 0.3148794
+      Rotation:
+        x: 0.4840031
+        y: 0.8245955
+        z: 0.27370507
+        w: 0.10425374
+  - JointId: Body_RightHandThumbProximal
+    LocalPose:
+      Position:
+        x: 0.033913855
+        y: -0.000000041158643
+        z: 0.000000047422372
+      Rotation:
+        x: -0.08075852
+        y: 0.045394298
+        z: -0.26711172
+        w: 0.95920235
+    RootPose:
+      Position:
+        x: -0.276683
+        y: 1.015203
+        z: 0.31803378
+      Rotation:
+        x: 0.22315373
+        y: 0.9028653
+        z: 0.3232552
+        w: 0.17476569
+  - JointId: Body_RightHandThumbDistal
+    LocalPose:
+      Position:
+        x: 0.035249263
+        y: -0.0000001583637
+        z: 0.00000013886105
+      Rotation:
+        x: 0.08344237
+        y: -0.06474183
+        z: 0.05480121
+        w: 0.9928964
+    RootPose:
+      Position:
+        x: -0.30626833
+        y: 1.0333896
+        z: 0.3119951
+      Rotation:
+        x: 0.30655754
+        y: 0.8998808
+        z: 0.24075162
+        w: 0.19564205
+  - JointId: Body_RightHandThumbTip
+    LocalPose:
+      Position:
+        x: 0.017371062
+        y: -0.0021083567
+        z: -0.0021045743
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1.0000002
+    RootPose:
+      Position:
+        x: -0.32106096
+        y: 1.042483
+        z: 0.30897576
+      Rotation:
+        x: 0.30655754
+        y: 0.8998808
+        z: 0.24075162
+        w: 0.19564205
+  - JointId: Body_RightHandIndexMetacarpal
+    LocalPose:
+      Position:
+        x: 0.04007888
+        y: -0.014617815
+        z: 0.01550689
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 0.9999999
+    RootPose:
+      Position:
+        x: -0.2628934
+        y: 0.9738248
+        z: 0.31572562
+      Rotation:
+        x: 0.25059843
+        y: 0.2196231
+        z: 0.9387743
+        w: 0.087571904
+  - JointId: Body_RightHandIndexProximal
+    LocalPose:
+      Position:
+        x: 0.060053892
+        y: 0.0069860816
+        z: 0.009058508
+      Rotation:
+        x: 0.015903972
+        y: 0.06552015
+        z: -0.4783407
+        w: 0.8755823
+    RootPose:
+      Position:
+        x: -0.3102526
+        y: 0.987442
+        z: 0.35190588
+      Rotation:
+        x: 0.054248985
+        y: 0.33283752
+        z: 0.79301137
+        w: 0.50735515
+  - JointId: Body_RightHandIndexIntermediate
+    LocalPose:
+      Position:
+        x: 0.039561618
+        y: -0.00000002705696
+        z: -0.000000018691761
+      Rotation:
+        x: -0.025673011
+        y: -0.00409825
+        z: -0.41239443
+        w: 0.91063446
+    RootPose:
+      Position:
+        x: -0.3292143
+        y: 1.020705
+        z: 0.34194845
+      Rotation:
+        x: -0.09763472
+        y: 0.30302703
+        z: 0.52123564
+        w: 0.7918053
+  - JointId: Body_RightHandIndexDistal
+    LocalPose:
+      Position:
+        x: 0.025350813
+        y: 0.000000067022015
+        z: -0.000000011334871
+      Rotation:
+        x: -0.017108634
+        y: 0.02207647
+        z: -0.20634758
+        w: 0.9780803
+    RootPose:
+      Position:
+        x: -0.3222942
+        y: 1.0401304
+        z: 0.32720295
+      Rotation:
+        x: -0.1830772
+        y: 0.28480065
+        z: 0.34945205
+        w: 0.87364453
+  - JointId: Body_RightHandIndexTip
+    LocalPose:
+      Position:
+        x: 0.011583645
+        y: 0.0051068747
+        z: 0.00063684594
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1.0000001
+    RootPose:
+      Position:
+        x: -0.31883416
+        y: 1.0498431
+        z: 0.31983015
+      Rotation:
+        x: -0.1830772
+        y: 0.28480065
+        z: 0.34945205
+        w: 0.87364453
+  - JointId: Body_RightHandMiddleMetacarpal
+    LocalPose:
+      Position:
+        x: 0.06902371
+        y: -0.011146393
+        z: 0.0024584555
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 0.9999999
+    RootPose:
+      Position:
+        x: -0.29458886
+        y: 0.97387886
+        z: 0.31966412
+      Rotation:
+        x: 0.25059843
+        y: 0.2196231
+        z: 0.9387743
+        w: 0.087571904
+  - JointId: Body_RightHandMiddleProximal
+    LocalPose:
+      Position:
+        x: 0.030744243
+        y: 0.00849363
+        z: -0.00065824704
+      Rotation:
+        x: -0.037892833
+        y: 0.077254295
+        z: -0.4067293
+        w: 0.9094873
+    RootPose:
+      Position:
+        x: -0.32179675
+        y: 0.9745315
+        z: 0.33631012
+      Rotation:
+        x: 0.06274625
+        y: 0.27286267
+        z: 0.8458673
+        w: 0.45400167
+  - JointId: Body_RightHandMiddleIntermediate
+    LocalPose:
+      Position:
+        x: 0.044776663
+        y: -0.00000015241936
+        z: -0.000000050363596
+      Rotation:
+        x: -0.012228919
+        y: 0.002227081
+        z: -0.18289031
+        w: 0.9830549
+    RootPose:
+      Position:
+        x: -0.34776223
+        y: 1.0104555
+        z: 0.32996917
+      Rotation:
+        x: 0.004343301
+        y: 0.2703817
+        z: 0.7519779
+        w: 0.60116905
+  - JointId: Body_RightHandMiddleDistal
+    LocalPose:
+      Position:
+        x: 0.028736688
+        y: -0.000000010564858
+        z: 0.000000051458763
+      Rotation:
+        x: -0.04765088
+        y: -0.0012585073
+        z: -0.0414654
+        w: 0.99800247
+    RootPose:
+      Position:
+        x: -0.3557267
+        y: 1.0365047
+        z: 0.3208149
+      Rotation:
+        x: -0.03457672
+        y: 0.23343267
+        z: 0.73842645
+        w: 0.6316964
+  - JointId: Body_RightHandMiddleTip
+    LocalPose:
+      Position:
+        x: 0.01431895
+        y: 0.0011909206
+        z: 0.000020732317
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1.0000004
+    RootPose:
+      Position:
+        x: -0.35970894
+        y: 1.0495294
+        z: 0.31623778
+      Rotation:
+        x: -0.03457672
+        y: 0.23343267
+        z: 0.73842645
+        w: 0.6316964
+  - JointId: Body_RightHandRingMetacarpal
+    LocalPose:
+      Position:
+        x: 0.036273986
+        y: -0.006275019
+        z: -0.015638381
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 0.9999999
+    RootPose:
+      Position:
+        x: -0.27593037
+        y: 0.9538945
+        z: 0.29365918
+      Rotation:
+        x: 0.25059843
+        y: 0.2196231
+        z: 0.9387743
+        w: 0.087571904
+  - JointId: Body_RightHandRingProximal
+    LocalPose:
+      Position:
+        x: 0.056241546
+        y: -0.0005357553
+        z: -0.0025794483
+      Rotation:
+        x: -0.08248093
+        y: 0.10574568
+        z: -0.31480023
+        w: 0.9396358
+    RootPose:
+      Position:
+        x: -0.3255292
+        y: 0.96885794
+        z: 0.315707
+      Rotation:
+        x: 0.059839528
+        y: 0.21708357
+        z: 0.8991528
+        w: 0.3752575
+  - JointId: Body_RightHandRingIntermediate
+    LocalPose:
+      Position:
+        x: 0.040676456
+        y: 0.000000008240551
+        z: 0.00000005163511
+      Rotation:
+        x: -0.036309876
+        y: -0.0011110137
+        z: -0.12142409
+        w: 0.99193585
+    RootPose:
+      Position:
+        x: -0.35445836
+        y: 0.99736434
+        z: 0.31345704
+      Rotation:
+        x: 0.020371215
+        y: 0.18953389
+        z: 0.8541524
+        w: 0.4838241
+  - JointId: Body_RightHandRingDistal
+    LocalPose:
+      Position:
+        x: 0.027718496
+        y: -0.00000004774357
+        z: -0.0000000037025765
+      Rotation:
+        x: -0.008086886
+        y: -0.029566765
+        z: -0.07346658
+        w: 0.99682677
+    RootPose:
+      Position:
+        x: -0.3691768
+        y: 1.0204883
+        z: 0.309338
+      Rotation:
+        x: 0.027724056
+        y: 0.16921648
+        z: 0.81682736
+        w: 0.550809
+  - JointId: Body_RightHandRingTip
+    LocalPose:
+      Position:
+        x: 0.0136853475
+        y: 0.0020365557
+        z: -0.0008005327
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1.0000004
+    RootPose:
+      Position:
+        x: -0.37653604
+        y: 1.0320501
+        z: 0.30727845
+      Rotation:
+        x: 0.027724056
+        y: 0.16921648
+        z: 0.81682736
+        w: 0.550809
+  - JointId: Body_RightHandLittleMetacarpal
+    LocalPose:
+      Position:
+        x: 0.035541818
+        y: -0.009825776
+        z: -0.023989625
+      Rotation:
+        x: -0.20703597
+        y: 0.14034285
+        z: -0.01831179
+        w: 0.9680416
+    RootPose:
+      Position:
+        x: -0.279359
+        y: 0.95377016
+        z: 0.28522614
+      Rotation:
+        x: 0.08868723
+        y: 0.035123248
+        z: 0.98780864
+        w: 0.123024255
+  - JointId: Body_RightHandLittleProximal
+    LocalPose:
+      Position:
+        x: 0.0476176
+        y: -0.0000010241018
+        z: 0.0000022967467
+      Rotation:
+        x: 0.072360866
+        y: 0.047826152
+        z: -0.23543432
+        w: 0.96801203
+    RootPose:
+      Position:
+        x: -0.3247855
+        y: 0.9656413
+        z: 0.29315996
+      Rotation:
+        x: 0.03924015
+        y: 0.13224222
+        z: 0.9289466
+        w: 0.34355575
+  - JointId: Body_RightHandLittleIntermediate
+    LocalPose:
+      Position:
+        x: 0.03204419
+        y: -0.00000014772557
+        z: 0.000000080062904
+      Rotation:
+        x: -0.049886074
+        y: 0.036987938
+        z: -0.13028796
+        w: 0.98952955
+    RootPose:
+      Position:
+        x: -0.3491665
+        y: 0.9864275
+        z: 0.29258445
+      Rotation:
+        x: -0.029898742
+        y: 0.102336004
+        z: 0.88250726
+        w: 0.45805523
+  - JointId: Body_RightHandLittleDistal
+    LocalPose:
+      Position:
+        x: 0.021186559
+        y: 0.000000096610705
+        z: -0.0000000024280051
+      Rotation:
+        x: 0.0009246385
+        y: -0.049044527
+        z: -0.05742339
+        w: 0.9971444
+    RootPose:
+      Position:
+        x: -0.36142477
+        y: 1.0034266
+        z: 0.28948015
+      Rotation:
+        x: 0.00801584
+        y: 0.078677766
+        z: 0.85505563
+        w: 0.5124703
+  - JointId: Body_RightHandLittleTip
+    LocalPose:
+      Position:
+        x: 0.010472432
+        y: 0.0012122445
+        z: -0.0010372329
+      Rotation:
+        x: 0
+        y: 0
+        z: 0
+        w: 1.0000004
+    RootPose:
+      Position:
+        x: -0.36755392
+        y: 1.011926
+        z: 0.28792801
+      Rotation:
+        x: 0.00801584
+        y: 0.078677766
+        z: 0.85505563
+        w: 0.5124703
+  _skeletonMapping:
+    _jointIds: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f000000300000003100000032000000330000003400000035000000360000003700000038000000390000003a0000003b0000003c0000003d0000003e0000003f000000400000004100000042000000430000004400000045000000
