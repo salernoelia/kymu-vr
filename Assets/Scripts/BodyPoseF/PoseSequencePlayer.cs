@@ -282,8 +282,6 @@ namespace BodyPoseF
                         // Use reflection to force the skeleton to update
                         ForceSkeletonUpdate(targetSkeleton);
                     }
-
-                    Debug.Log($"Applied pose {_currentPoseIndex} to skeleton provider");
                 }
                 else
                 {

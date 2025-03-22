@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Oculus.Interaction;
 using Oculus.Interaction.Body.Input;
 using Oculus.Interaction.Body.PoseDetection;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -38,9 +40,26 @@ namespace BodyPoseF
         [SerializeField, Interface(typeof(IBodyPose))]
         private UnityEngine.Object _sourcePose;
 
-        [Tooltip("The sequence of poses to detect during the exercise")]
+        [Tooltip("Optional: Load poses from a folder (takes precedence over individual pose assignments)")]
+        [SerializeField] private string _posesFolderPath = "Assets/Poses";
+
+        [Tooltip("The sequence of poses to detect during the exercise (if not loading from folder)")]
         [SerializeField, Interface(typeof(IBodyPose))]
         private List<UnityEngine.Object> _exercisePoses = new List<UnityEngine.Object>();
+
+        [Header("Joint Comparison Configuration")]
+        [Tooltip("Joint configuration for pose comparison")]
+        [SerializeField]
+        private List<BodyPoseComparerActiveStateMultiFree.JointComparerConfig> _jointConfig = new List<BodyPoseComparerActiveStateMultiFree.JointComparerConfig>
+        {
+            new BodyPoseComparerActiveStateMultiFree.JointComparerConfig(BodyJointId.Body_Head, 30f, 4f),
+            new BodyPoseComparerActiveStateMultiFree.JointComparerConfig(BodyJointId.Body_LeftArmUpper, 30f, 4f),
+            new BodyPoseComparerActiveStateMultiFree.JointComparerConfig(BodyJointId.Body_LeftArmLower, 30f, 4f),
+            new BodyPoseComparerActiveStateMultiFree.JointComparerConfig(BodyJointId.Body_LeftHandWrist, 36f, 4f),
+            new BodyPoseComparerActiveStateMultiFree.JointComparerConfig(BodyJointId.Body_RightArmUpper, 30f, 4f),
+            new BodyPoseComparerActiveStateMultiFree.JointComparerConfig(BodyJointId.Body_RightArmLower, 30f, 4f),
+            new BodyPoseComparerActiveStateMultiFree.JointComparerConfig(BodyJointId.Body_RightHandWrist, 36f, 4f)
+        };
 
         [Header("Status Display")]
         [Tooltip("Display a timer during the exercise")]
@@ -60,18 +79,26 @@ namespace BodyPoseF
         private GameObject _timerTextObj;
         private int _currentPoseIndex = -1;
         private float _currentPoseHoldStartTime = 0f;
+        private int _matchedPoseIndex = -1;
 
         // Record of which poses were successfully detected and their accuracy
         private Dictionary<int, float> _detectedPoses = new Dictionary<int, float>();
         private Dictionary<int, float> _poseAccuracy = new Dictionary<int, float>();
         private Dictionary<int, float> _bestPoseAccuracy = new Dictionary<int, float>();
+        private List<IBodyPose> _loadedPoses = new List<IBodyPose>();
 
         // Property to get the remaining time in the exercise
         public float RemainingTime => Mathf.Max(0, _exerciseDuration - _exerciseElapsedTime);
 
         // Property to get the percentage of poses detected
-        public float CompletionPercentage => _exercisePoses.Count > 0 ?
-            (float)_detectedPoses.Count / _exercisePoses.Count * 100f : 0f;
+        public float CompletionPercentage
+        {
+            get
+            {
+                int totalPoses = _loadedPoses.Count > 0 ? _loadedPoses.Count : _exercisePoses.Count;
+                return totalPoses > 0 ? (float)_detectedPoses.Count / totalPoses * 100f : 0f;
+            }
+        }
 
         // Property to get overall accuracy
         public float OverallAccuracy
@@ -79,20 +106,15 @@ namespace BodyPoseF
             get
             {
                 if (_bestPoseAccuracy.Count == 0) return 0f;
-                return _bestPoseAccuracy.Values.Sum() / _exercisePoses.Count;
+                int totalPoses = _loadedPoses.Count > 0 ? _loadedPoses.Count : _exercisePoses.Count;
+                return _bestPoseAccuracy.Values.Sum() / totalPoses;
             }
         }
 
         protected virtual void Awake()
         {
             _poseComparer = GetComponent<BodyPoseComparerActiveStateMultiFree>();
-
-            // Initialize detection data structures
-            for (int i = 0; i < _exercisePoses.Count; i++)
-            {
-                _poseAccuracy[i] = 0f;
-                _bestPoseAccuracy[i] = 0f;
-            }
+            LoadPoses();
         }
 
         protected virtual void Start()
@@ -101,6 +123,74 @@ namespace BodyPoseF
             if (_sourcePose != null)
             {
                 _poseComparer.InjectSourcePose(_sourcePose as IBodyPose);
+            }
+
+            // Configure joint comparison settings
+            _poseComparer.InjectJoints(_jointConfig);
+        }
+
+        /// <summary>
+        /// Loads poses either from folder or from assigned list
+        /// </summary>
+        private void LoadPoses()
+        {
+            _loadedPoses.Clear();
+
+            // First try to load from folder if specified
+            if (!string.IsNullOrEmpty(_posesFolderPath))
+            {
+                if (Directory.Exists(_posesFolderPath))
+                {
+                    // Load all pose assets from the folder
+                    string[] files = Directory.GetFiles(_posesFolderPath, "*.asset", SearchOption.TopDirectoryOnly);
+
+                    List<IBodyPose> folderPoses = new List<IBodyPose>();
+                    foreach (string file in files)
+                    {
+                        string relativePath = file.Replace(Application.dataPath, "Assets");
+#if UNITY_EDITOR
+                        UnityEngine.Object poseAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(relativePath);
+                        if (poseAsset != null && poseAsset is IBodyPose bodyPose)
+                        {
+                            folderPoses.Add(bodyPose);
+                        }
+#endif
+                    }
+
+                    if (folderPoses.Count > 0)
+                    {
+                        _loadedPoses = folderPoses;
+                        Debug.Log($"Loaded {_loadedPoses.Count} poses from folder: {_posesFolderPath}");
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"No valid pose assets found in folder: {_posesFolderPath}");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"Poses folder not found: {_posesFolderPath}");
+                }
+            }
+
+            // If nothing loaded from folder, use individually assigned poses
+            if (_loadedPoses.Count == 0)
+            {
+                foreach (var pose in _exercisePoses)
+                {
+                    if (pose is IBodyPose bodyPose)
+                    {
+                        _loadedPoses.Add(bodyPose);
+                    }
+                }
+                Debug.Log($"Using {_loadedPoses.Count} individually assigned poses");
+            }
+
+            // Initialize detection data structures
+            for (int i = 0; i < _loadedPoses.Count; i++)
+            {
+                _poseAccuracy[i] = 0f;
+                _bestPoseAccuracy[i] = 0f;
             }
         }
 
@@ -135,13 +225,24 @@ namespace BodyPoseF
         {
             if (_isExerciseActive) return;
 
+            // Make sure poses are loaded
+            if (_loadedPoses.Count == 0)
+            {
+                LoadPoses();
+                if (_loadedPoses.Count == 0)
+                {
+                    Debug.LogError("No poses loaded for exercise. Cannot start.");
+                    return;
+                }
+            }
+
             // Reset exercise data
             _detectedPoses.Clear();
             _poseAccuracy.Clear();
             _bestPoseAccuracy.Clear();
 
             // Initialize tracking data
-            for (int i = 0; i < _exercisePoses.Count; i++)
+            for (int i = 0; i < _loadedPoses.Count; i++)
             {
                 _poseAccuracy[i] = 0f;
                 _bestPoseAccuracy[i] = 0f;
@@ -150,14 +251,10 @@ namespace BodyPoseF
             _exerciseStartTime = Time.time;
             _exerciseElapsedTime = 0f;
             _currentPoseIndex = -1;
+            _matchedPoseIndex = -1;
 
-            // Configure pose comparer with all exercise poses
-            List<IBodyPose> poses = new List<IBodyPose>();
-            foreach (var pose in _exercisePoses)
-            {
-                poses.Add(pose as IBodyPose);
-            }
-            _poseComparer.InjectReferencePoses(poses);
+            // Configure pose comparer with exercise poses
+            _poseComparer.InjectReferencePoses(_loadedPoses);
 
             // Create timer display if needed
             if (_showTimer)
@@ -168,7 +265,7 @@ namespace BodyPoseF
             _isExerciseActive = true;
             _onExerciseStarted?.Invoke();
 
-            Debug.Log($"Exercise started. {_exercisePoses.Count} poses to detect in {_exerciseDuration} seconds.");
+            Debug.Log($"Exercise started. {_loadedPoses.Count} poses to detect in {_exerciseDuration} seconds.");
         }
 
         /// <summary>
@@ -224,7 +321,7 @@ namespace BodyPoseF
             _onExerciseCompleted?.Invoke(finalResults, overallAccuracy);
 
             Debug.Log($"Exercise completed. Overall accuracy: {overallAccuracy:F1}%");
-            Debug.Log($"Detected {_detectedPoses.Count} out of {_exercisePoses.Count} poses.");
+            Debug.Log($"Detected {_detectedPoses.Count} out of {_loadedPoses.Count} poses.");
 
             // Log individual pose results
             foreach (var pair in _bestPoseAccuracy)
@@ -249,10 +346,9 @@ namespace BodyPoseF
             // The pose comparer's Active property performs the comparison
             if (_poseComparer.Active)
             {
-                // A pose is being detected
+                // Find which pose is being matched
                 int detectedPoseIndex = GetDetectedPoseIndex();
-
-                if (detectedPoseIndex >= 0 && detectedPoseIndex < _exercisePoses.Count)
+                if (detectedPoseIndex >= 0)
                 {
                     // If it's a new pose or we allow repeated poses
                     if (detectedPoseIndex != _currentPoseIndex)
@@ -310,31 +406,57 @@ namespace BodyPoseF
         }
 
         /// <summary>
-        /// Gets the index of the currently detected pose
+        /// Gets the index of the currently detected pose by comparing against each pose in sequence
         /// </summary>
         private int GetDetectedPoseIndex()
         {
-            // Check the pose comparer's feature states to determine which pose is being matched
-            var featureStates = _poseComparer.FeatureStates;
+            // We need to determine which of the reference poses is currently being matched
+            // Since BodyPoseComparerActiveStateMultiFree doesn't expose which pose is matched,
+            // we need to manually perform the comparison again
 
-            // Get the index from the pose comparer
-            // This relies on the internal implementation of BodyPoseComparerActiveStateMultiFree
-            // which stores the matched pose index
-            if (featureStates.Count > 0)
+            for (int i = 0; i < _loadedPoses.Count; i++)
             {
-                foreach (var state in featureStates)
-                {
-                    // We need to access the matching pose index from the comparer
-                    var config = state.Key;
-                    var poseState = state.Value;
+                IBodyPose referencePose = _loadedPoses[i];
+                bool poseMatches = true;
 
-                    // For now, use a simple approach: the detected pose is the one that has feature states
-                    // In a more complete implementation, this would get the actual pose index
-                    return 0; // Placeholder - would need to access the actual matched pose index
+                // Check each joint configuration
+                foreach (var config in _jointConfig)
+                {
+                    float maxDelta = _poseComparer.Active ?
+                                    config.MaxDelta + config.Width / 2f :
+                                    config.MaxDelta - config.Width / 2f;
+
+                    if (!GetJointDelta(_sourcePose as IBodyPose, referencePose, config.Joint, out float delta) ||
+                        Mathf.Abs(delta) > maxDelta)
+                    {
+                        poseMatches = false;
+                        break;
+                    }
+                }
+
+                if (poseMatches)
+                {
+                    return i; // Found a matching pose
                 }
             }
 
-            return -1;
+            return -1; // No match found
+        }
+
+        /// <summary>
+        /// Calculates angle delta between two poses for a specific joint
+        /// </summary>
+        private bool GetJointDelta(IBodyPose sourcePose, IBodyPose referencePose, BodyJointId joint, out float delta)
+        {
+            if (!sourcePose.GetJointPoseLocal(joint, out Pose localSource) ||
+                !referencePose.GetJointPoseLocal(joint, out Pose localRef))
+            {
+                delta = 0;
+                return false;
+            }
+
+            delta = Quaternion.Angle(localSource.rotation, localRef.rotation);
+            return true;
         }
 
         /// <summary>
@@ -342,36 +464,36 @@ namespace BodyPoseF
         /// </summary>
         private float CalculatePoseAccuracy(int poseIndex)
         {
-            // Get the feature states from the pose comparer
-            var featureStates = _poseComparer.FeatureStates;
-
-            if (featureStates.Count == 0)
-            {
+            if (poseIndex < 0 || poseIndex >= _loadedPoses.Count)
                 return 0f;
-            }
 
-            // Sum up how close we are to the perfect pose
-            float totalDelta = 0f;
-            float totalMaxDelta = 0f;
+            IBodyPose referencePose = _loadedPoses[poseIndex];
+            IBodyPose sourcePose = _sourcePose as IBodyPose;
 
-            foreach (var state in featureStates)
+            if (sourcePose == null || referencePose == null)
+                return 0f;
+
+            // Calculate total accuracy across all joints
+            float totalMaxAngle = 0f;
+            float totalCurrentAngle = 0f;
+            int validJoints = 0;
+
+            foreach (var config in _jointConfig)
             {
-                var config = state.Key;
-                var poseState = state.Value;
-
-                totalDelta += poseState.Delta;
-                totalMaxDelta += poseState.MaxDelta;
+                if (GetJointDelta(sourcePose, referencePose, config.Joint, out float delta))
+                {
+                    totalMaxAngle += config.MaxDelta;
+                    totalCurrentAngle += Mathf.Min(delta, config.MaxDelta);
+                    validJoints++;
+                }
             }
 
-            // Calculate accuracy as percentage
-            if (totalMaxDelta <= 0f)
-            {
-                return 100f;
-            }
+            if (validJoints == 0)
+                return 0f;
 
-            // Higher accuracy when delta is smaller
-            float accuracy = (1f - (totalDelta / totalMaxDelta)) * 100f;
-            return Mathf.Clamp(accuracy, 0f, 100f);
+            // Convert to percentage (lower angle = higher accuracy)
+            float accuracyPercent = (1f - (totalCurrentAngle / totalMaxAngle)) * 100f;
+            return Mathf.Clamp(accuracyPercent, 0f, 100f);
         }
 
         /// <summary>
@@ -456,12 +578,35 @@ namespace BodyPoseF
                 _timerTextObj = null;
             }
         }
+
+        /// <summary>
+        /// Load poses by specific path
+        /// </summary>
+        public void LoadPosesFromPath(string folderPath)
+        {
+            _posesFolderPath = folderPath;
+            LoadPoses();
+        }
+
+        /// <summary>
+        /// Set joint configuration for pose comparison
+        /// </summary>
+        public void SetJointConfig(List<BodyPoseComparerActiveStateMultiFree.JointComparerConfig> config)
+        {
+            _jointConfig = new List<BodyPoseComparerActiveStateMultiFree.JointComparerConfig>(config);
+            if (_poseComparer != null)
+            {
+                _poseComparer.InjectJoints(_jointConfig);
+            }
+        }
     }
 
 #if UNITY_EDITOR
     [UnityEditor.CustomEditor(typeof(BodyPoseExerciseTracker))]
     public class BodyPoseExerciseTrackerEditor : UnityEditor.Editor
     {
+        private bool _showJointConfigs = true;
+
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
@@ -470,6 +615,39 @@ namespace BodyPoseF
 
             UnityEditor.EditorGUILayout.Space();
 
+            // Browse folder button
+            using (new UnityEditor.EditorGUILayout.HorizontalScope())
+            {
+                if (GUILayout.Button("Browse Poses Folder"))
+                {
+                    string path = UnityEditor.EditorUtility.OpenFolderPanel("Select Poses Folder", "Assets", "");
+                    if (!string.IsNullOrEmpty(path))
+                    {
+                        // Convert absolute path to relative project path
+                        if (path.StartsWith(Application.dataPath))
+                        {
+                            path = "Assets" + path.Substring(Application.dataPath.Length);
+                        }
+
+                        // Set the path via serialized property
+                        SerializedProperty posesFolderPathProp = serializedObject.FindProperty("_posesFolderPath");
+                        posesFolderPathProp.stringValue = path;
+                        serializedObject.ApplyModifiedProperties();
+
+                        // Reload poses
+                        tracker.Invoke("LoadPoses", 0.1f);
+                    }
+                }
+
+                if (GUILayout.Button("Reload Poses"))
+                {
+                    tracker.Invoke("LoadPoses", 0.1f);
+                }
+            }
+
+            UnityEditor.EditorGUILayout.Space();
+
+            // Exercise controls
             using (new UnityEditor.EditorGUILayout.HorizontalScope())
             {
                 if (GUILayout.Button("Start Exercise"))

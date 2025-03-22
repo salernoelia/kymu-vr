@@ -1,13 +1,11 @@
-using System;
+using UnityEngine;
+using UnityEngine.Events;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
+using System;
 
 namespace BodyPoseF
 {
-    /// <summary>
-    /// Saves exercise results for later analysis
-    /// </summary>
     public class BodyPoseExerciseResultSaver : MonoBehaviour
     {
         [Tooltip("Directory where exercise results will be saved")]
@@ -28,7 +26,6 @@ namespace BodyPoseF
 
         private void Awake()
         {
-            // Find the tracker if not assigned
             if (_exerciseTracker == null)
             {
                 _exerciseTracker = GetComponent<BodyPoseExerciseTracker>();
@@ -38,7 +35,6 @@ namespace BodyPoseF
                 }
             }
 
-            // Create directories if needed
             if (!Directory.Exists(resultsDirectory))
             {
                 Directory.CreateDirectory(resultsDirectory);
@@ -49,14 +45,14 @@ namespace BodyPoseF
         {
             if (_exerciseTracker != null)
             {
-                // Subscribe to the exercise completed event
+                UnityAction<Dictionary<int, float>, float> listener = SaveExerciseResults;
                 _exerciseTracker.GetType()
                     .GetField("_onExerciseCompleted", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
                     ?.GetValue(_exerciseTracker)
                     ?.GetType()
                     .GetMethod("AddListener")
                     ?.Invoke(_exerciseTracker.GetType().GetField("_onExerciseCompleted", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(_exerciseTracker),
-                        new object[] { new Action<Dictionary<int, float>, float>(SaveExerciseResults) });
+                        new object[] { listener });
             }
         }
 
@@ -64,25 +60,19 @@ namespace BodyPoseF
         {
             if (_exerciseTracker != null)
             {
-                // Unsubscribe from the exercise completed event
+                UnityAction<Dictionary<int, float>, float> listener = SaveExerciseResults;
                 _exerciseTracker.GetType()
                     .GetField("_onExerciseCompleted", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
                     ?.GetValue(_exerciseTracker)
                     ?.GetType()
                     .GetMethod("RemoveListener")
                     ?.Invoke(_exerciseTracker.GetType().GetField("_onExerciseCompleted", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(_exerciseTracker),
-                        new object[] { new Action<Dictionary<int, float>, float>(SaveExerciseResults) });
+                        new object[] { listener });
             }
         }
 
-        /// <summary>
-        /// Saves the exercise results to a JSON file
-        /// </summary>
-        /// <param name="poseAccuracies">Dictionary mapping pose indices to accuracy scores</param>
-        /// <param name="overallAccuracy">Overall exercise accuracy score</param>
         public void SaveExerciseResults(Dictionary<int, float> poseAccuracies, float overallAccuracy)
         {
-            // Create result object
             ExerciseResult result = new ExerciseResult
             {
                 timestamp = DateTime.Now.ToString("yyyyMMdd-HHmmss"),
@@ -95,7 +85,6 @@ namespace BodyPoseF
                 detectedPoses = 0
             };
 
-            // Count detected poses
             foreach (var pair in poseAccuracies)
             {
                 if (pair.Value > 0)
@@ -104,10 +93,7 @@ namespace BodyPoseF
                 }
             }
 
-            // Convert to JSON
             string json = JsonUtility.ToJson(result, true);
-
-            // Save to file
             string filename = $"{resultsDirectory}/Exercise-{result.timestamp}.json";
             File.WriteAllText(filename, json);
 
