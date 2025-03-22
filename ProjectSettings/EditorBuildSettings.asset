@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SlingShotScene.unity
     guid: 185b21fc912964a8fba8fb10d8154f46
   - enabled: 0
-    path: Assets/Scenes/PoseRecordingScene.unity
+    path: Assets/Scenes/Development/SinglePoseRecordingScene.unity
     guid: cc2bbd3ae6379674899c567eaf18318f
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 814d34982f5e66f4386248151ad8750f, type: 2}
