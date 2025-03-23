@@ -3773,18 +3773,26 @@ PrefabInstance:
       propertyPath: '_audioClips.Array.data[0]'
       value: 
       objectReference: {fileID: 8300000, guid: 9f6009b8a628336ea1dd563650e84874, type: 3}
+    - target: {fileID: 4565725449189531732, guid: 8312580dd84b5e24ca7120a0d91ad3b7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5367231275086305442, guid: 8312580dd84b5e24ca7120a0d91ad3b7, type: 3}
       propertyPath: m_Resource
       value: 
-      objectReference: {fileID: 8300000, guid: 9f6009b8a628336ea1dd563650e84874, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5367231275086305442, guid: 8312580dd84b5e24ca7120a0d91ad3b7, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 9f6009b8a628336ea1dd563650e84874, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5367231275086305442, guid: 8312580dd84b5e24ca7120a0d91ad3b7, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 24300002, guid: b54d78e374f05eb41aab8c63b395041e, type: 2}
+    - target: {fileID: 7879665315297458056, guid: 8312580dd84b5e24ca7120a0d91ad3b7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7879665315297458056, guid: 8312580dd84b5e24ca7120a0d91ad3b7, type: 3}
       propertyPath: _sourcePose
       value: 
