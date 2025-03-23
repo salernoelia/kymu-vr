@@ -7,11 +7,6 @@ using UnityEngine;
 
 namespace BodyPoseF
 {
-    /// <summary>
-    /// Compares a user-provided set of joints between a source Body Pose and multiple reference poses.
-    /// You can select which joints to monitor and what the maximum angle delta between each joint should be.
-    /// If all joints are within this maximum range for ANY of the reference poses, the IActiveState becomes Active.
-    /// </summary>
     public sealed class BodyPoseComparerActiveStateMultiFree :
         MonoBehaviour, IActiveState, ITimeConsumer
     {
@@ -33,7 +28,7 @@ namespace BodyPoseF
             public BodyJointId Joint;
             [Min(0)] public float MaxDelta;
             [Min(0)] public float Width;
-            
+
             public JointComparerConfig(BodyJointId joint, float maxDelta, float width)
             {
                 Joint = joint;
@@ -42,25 +37,16 @@ namespace BodyPoseF
             }
         }
 
-        /// <summary>
-        /// The source body pose to compare against reference poses.
-        /// </summary>
         [Tooltip("The source body pose to compare against reference poses.")]
         [SerializeField, Interface(typeof(IBodyPose))]
         private UnityEngine.Object _sourcePose;
         private IBodyPose SourcePose;
 
-        /// <summary>
-        /// The reference poses to compare against the source pose.
-        /// </summary>
         [Tooltip("The reference poses to compare against the source pose.")]
         [SerializeField, Interface(typeof(IBodyPose))]
         private List<UnityEngine.Object> _referencePoses = new List<UnityEngine.Object>();
         private List<IBodyPose> ReferencePoses = new List<IBodyPose>();
 
-        /// <summary>
-        /// A list of JointComparerConfigs which contains the parameters to test.
-        /// </summary>
         [SerializeField]
         private List<JointComparerConfig> _configs = new List<JointComparerConfig>
         {
@@ -73,12 +59,6 @@ namespace BodyPoseF
             new JointComparerConfig(BodyJointId.Body_RightHandWrist, 36f, 4f)
         };
 
-
-
-        /// <summary>
-        /// A new state must be maintaned for at least this many seconds before the Active property changes.
-        /// Prevents unwanted momentary activations/deactivations of the IActiveState.
-        /// </summary>
         [Tooltip("A new state must be maintaned for at least this many seconds before the Active property changes.")]
         [SerializeField]
         private float _minTimeInState = 0.05f;
@@ -105,6 +85,12 @@ namespace BodyPoseF
         private bool _internalActive;
         private float _lastStateChangeTime;
 
+        // New variable to track the detected pose index
+        private int _detectedPoseIndex;
+
+        // Public property to get the detected pose index
+        public int DetectedPoseIndex => _detectedPoseIndex;
+
         private void Awake()
         {
             SourcePose = _sourcePose as IBodyPose;
@@ -118,7 +104,7 @@ namespace BodyPoseF
         private void Start()
         {
             this.AssertField(SourcePose, nameof(SourcePose));
-            this.AssertCollectionField(ReferencePoses, nameof(ReferencePoses), 
+            this.AssertCollectionField(ReferencePoses, nameof(ReferencePoses),
         "At least one reference pose must be provided");
 
         }
@@ -133,13 +119,14 @@ namespace BodyPoseF
                 }
 
                 bool wasActive = _internalActive;
-                _internalActive = false; 
+                _internalActive = false;
+                _detectedPoseIndex = 0; // Reset to 0 when no pose is detected
 
-                foreach (var referencePose in ReferencePoses)
+                for (int i = 0; i < ReferencePoses.Count; i++)
                 {
+                    var referencePose = ReferencePoses[i];
                     bool poseMatches = true;
 
-                    
                     foreach (var config in _configs)
                     {
                         float maxDelta = wasActive ?
@@ -148,18 +135,19 @@ namespace BodyPoseF
 
                         bool withinDelta = GetJointDelta(SourcePose, referencePose, config.Joint, out float delta) &&
                                           Mathf.Abs(delta) <= maxDelta;
-                        
+
                         _featureStates[config] = new BodyPoseComparerFeatureState(delta, maxDelta);
                         poseMatches &= withinDelta;
                     }
-                    
+
                     if (poseMatches)
                     {
                         _internalActive = true;
-                        break; 
+                        _detectedPoseIndex = i + 1; // Set to the index of the detected pose + 1
+                        break;
                     }
                 }
-                
+
                 float time = _timeProvider();
                 if (wasActive != _internalActive)
                 {
@@ -183,7 +171,7 @@ namespace BodyPoseF
             }
 
             delta = Quaternion.Angle(localSource.rotation, localRef.rotation);
-        
+
             return true;
         }
 
@@ -207,7 +195,7 @@ namespace BodyPoseF
         {
             _referencePoses = new List<UnityEngine.Object>();
             ReferencePoses = new List<IBodyPose>();
-            
+
             foreach (var pose in referencePoses)
             {
                 _referencePoses.Add(pose as UnityEngine.Object);
@@ -219,7 +207,6 @@ namespace BodyPoseF
         {
             _configs = new List<JointComparerConfig>(configs);
         }
-
 
         #endregion
     }
