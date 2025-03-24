@@ -9920,7 +9920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2859147190566827361, guid: b16424dcc3deba241b1457370a8e5b5e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.7961
+      value: 0.5851
       objectReference: {fileID: 0}
     - target: {fileID: 2859147190566827361, guid: b16424dcc3deba241b1457370a8e5b5e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -16076,63 +16076,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4702229198241056, guid: 0ba258545da721e488ecb71ffd143b6f, type: 3}
   m_PrefabInstance: {fileID: 518226879}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &521178820
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 521178822}
-  - component: {fileID: 521178821}
-  m_Layer: 0
-  m_Name: CupHitCounter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &521178821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521178820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19ac7a89aabcdba47bbff2d7ddd6b3d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  counterText: {fileID: 879220987}
-  ballTag: SlingShotAndPingPongBall
-  cupTag: RespawnableCup
-  minImpactForce: 0.5
-  floorY: 0.05
-  cooldownTime: 1
-  singleCounterOnly: 1
-  singleCounterFormat: 'Cups Hit: {0}'
-  detailedFormat: 'Hits: {0}
-
-    Floor: {1}
-
-    Respawns: {2}'
---- !u!4 &521178822
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 521178820}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04867235, y: 1.3358346, z: -0.05085105}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &522462937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24015,6 +23958,11 @@ MonoBehaviour:
   _minimumVelocity: 0.05
   _timeBetweenCollisions: 0.2
   _allowMultipleCollisions: 0
+--- !u!1 &813128685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2859147190566827362, guid: b16424dcc3deba241b1457370a8e5b5e, type: 3}
+  m_PrefabInstance: {fileID: 879220984}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &814196097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26303,7 +26251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2859147190566827361, guid: b16424dcc3deba241b1457370a8e5b5e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.83745253
+      value: 0.6264525
       objectReference: {fileID: 0}
     - target: {fileID: 2859147190566827361, guid: b16424dcc3deba241b1457370a8e5b5e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -26453,7 +26401,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2859147190566827361, guid: b16424dcc3deba241b1457370a8e5b5e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1144388252}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2859147190566827362, guid: b16424dcc3deba241b1457370a8e5b5e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 879220996}
   m_SourcePrefab: {fileID: 100100000, guid: b16424dcc3deba241b1457370a8e5b5e, type: 3}
 --- !u!223 &879220985 stripped
 Canvas:
@@ -26476,6 +26427,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &879220996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813128685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ac7a89aabcdba47bbff2d7ddd6b3d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  counterText: {fileID: 879220987}
+  ballTag: SlingShotAndPingPongBall
+  cupTag: RespawnableCup
+  minImpactForce: 0.5
+  minCupToCupForce: 0.8
+  floorY: 0.05
+  cooldownTime: 1
+  angleTolerance: 30
+  singleCounterOnly: 1
+  singleCounterFormat: 'Cups Hit: {0}'
+  detailedFormat: 'Hits: {0}
+
+    Floor: {1}
+
+    Respawns: {2}'
 --- !u!1001 &884508783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41899,7 +41877,7 @@ Transform:
   m_GameObject: {fileID: 1532249328}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.43211076, z: -0, w: 0.90182054}
-  m_LocalPosition: {x: 0.20501101, y: 0, z: -0.7861402}
+  m_LocalPosition: {x: 0.20501101, y: -0.211, z: -0.7861402}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -48391,7 +48369,7 @@ Transform:
   m_GameObject: {fileID: 1816154435}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.9432313, z: -0, w: 0.33213675}
-  m_LocalPosition: {x: 0.459, y: 0.75, z: -0.38}
+  m_LocalPosition: {x: 0.459, y: 0.539, z: -0.38}
   m_LocalScale: {x: 0.3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -56889,4 +56867,3 @@ SceneRoots:
   - {fileID: 78261735}
   - {fileID: 815314616}
   - {fileID: 389215314}
-  - {fileID: 521178822}

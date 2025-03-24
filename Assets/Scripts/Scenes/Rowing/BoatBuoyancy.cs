@@ -10,6 +10,11 @@ namespace Rowing
         public float buoyancyForce = 20f;
         public float waterHeight = 0f;
         public Rigidbody rb;
+        public float waterLevelOffset = 0f;
+        [Tooltip("Stronger damping makes the boat more stable")]
+        public float dampingFactor = 0.05f;
+        [Tooltip("Affects force calculation - higher values provide more lift")]
+        public float waterDensity = 1000f;
 
         [Header("Paddling Controls")]
         public Transform leftPaddle;
@@ -32,6 +37,12 @@ namespace Rowing
         public float waterDrag = 0.8f;
         public float waterAngularDrag = 5.0f;
 
+        // Advanced buoyancy
+        private float _baseDrag;
+        private float _baseAngularDrag;
+        private Vector3[] _velocities;
+        private float _percentSubmerged = 0f;
+
         private Vector3 previousLeftPaddlePos;
         private Vector3 previousRightPaddlePos;
         private bool isLeftPaddleInWater = false;
@@ -47,14 +58,46 @@ namespace Rowing
                 rb = GetComponent<Rigidbody>();
             }
 
-            previousLeftPaddlePos = leftPaddle.position;
-            previousRightPaddlePos = rightPaddle.position;
+            _baseDrag = rb.linearDamping;
+            _baseAngularDrag = rb.angularDamping;
 
-            rb.linearDamping = 0.1f;
-            rb.angularDamping = 2.0f;
+            // Ensure we have some float points
+            if (floatPoints == null || floatPoints.Length == 0)
+            {
+                Debug.LogWarning("No float points defined - adding default point at center");
+                GameObject pointObj = new GameObject("FloatPoint");
+                pointObj.transform.parent = transform;
+                pointObj.transform.localPosition = Vector3.zero;
+                floatPoints = new Transform[] { pointObj.transform };
+            }
+
+            // Initialize velocity array to track each point's velocity
+            _velocities = new Vector3[floatPoints.Length];
+
+            previousLeftPaddlePos = leftPaddle ? leftPaddle.position : Vector3.zero;
+            previousRightPaddlePos = rightPaddle ? rightPaddle.position : Vector3.zero;
 
             rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+            // Find water height from Water object if possible
+            var waterSystem = FindObjectOfType<WaterSystem.Water>();
+            if (waterSystem != null)
+            {
+                waterHeight = waterSystem.transform.position.y;
+                Debug.Log($"Found water system at height: {waterHeight}");
+            }
+            else
+            {
+                Debug.LogWarning("No water system found - using default water height: " + waterHeight);
+            }
+
+            // Make sure water layer exists
+            if (LayerMask.NameToLayer("Water") == -1)
+            {
+                Debug.LogError("Water layer doesn't exist! Please add 'Water' layer in Project Settings.");
+            }
         }
+
 
         private void FixedUpdate()
         {
@@ -64,45 +107,82 @@ namespace Rowing
 
             turnDirection = 0f;
 
-            previousLeftPaddlePos = leftPaddle.position;
-            previousRightPaddlePos = rightPaddle.position;
+            if (leftPaddle) previousLeftPaddlePos = leftPaddle.position;
+            if (rightPaddle) previousRightPaddlePos = rightPaddle.position;
         }
 
         public void HandleBuoyancy()
         {
-            int submergedPoints = 0;
+            float submergedAmount = 0f;
 
-            foreach (Transform point in floatPoints)
+            if (floatPoints.Length == 0)
+                return;
+
+            // Calculate point velocities
+            for (int i = 0; i < floatPoints.Length; i++)
             {
-                if (point.position.y < waterHeight)
-                {
-                    float submersion = Mathf.Clamp01((waterHeight - point.position.y) / 0.2f);
-                    Vector3 force = Vector3.up * submersion * buoyancyForce;
-                    rb.AddForceAtPosition(force, point.position, ForceMode.Force);
-                    submergedPoints++;
-                }
+                if (floatPoints[i] != null)
+                    _velocities[i] = rb.GetPointVelocity(floatPoints[i].position);
             }
 
-            if (submergedPoints > 0)
+            // Apply buoyancy forces at each point
+            for (int i = 0; i < floatPoints.Length; i++)
             {
-                rb.linearDamping = waterDrag;
-                rb.angularDamping = waterAngularDrag;
+                Transform point = floatPoints[i];
+                if (point == null) continue;
+
+                float pointHeight = waterHeight + waterLevelOffset;
+
+                // Skip if point is above water
+                if (point.position.y - 0.1f >= pointHeight) continue;
+
+                // Calculate submersion factor (0-1)
+                float k = Mathf.Clamp01((pointHeight - point.position.y) / 0.2f);
+                submergedAmount += k / floatPoints.Length;
+
+                // Apply damping force (resists velocity)
+                Vector3 dampingForce = dampingFactor * rb.mass * -_velocities[i];
+
+                float forceMagnitude = waterDensity * Mathf.Abs(Physics.gravity.y) * k * buoyancyForce * 1.5f; // Increased multiplier
+                Vector3 force = dampingForce + Vector3.up * forceMagnitude;
+
+
+                rb.AddForceAtPosition(force, point.position, ForceMode.Force);
+            }
+
+            // Update drag based on submersion
+            UpdateDrag(submergedAmount);
+        }
+
+        private void UpdateDrag(float submergedAmount)
+        {
+            _percentSubmerged = Mathf.Lerp(_percentSubmerged, submergedAmount, 0.25f);
+
+            if (_percentSubmerged > 0)
+            {
+                rb.linearDamping = _baseDrag + waterDrag * _percentSubmerged * 10f;
+                rb.angularDamping = _baseAngularDrag + waterAngularDrag * _percentSubmerged;
             }
             else
             {
-                rb.linearDamping = 0.1f;
-                rb.angularDamping = 2.0f;
+                rb.linearDamping = _baseDrag;
+                rb.angularDamping = _baseAngularDrag;
             }
         }
 
         private void CheckPaddlesInWater()
         {
-            isLeftPaddleInWater = leftPaddle.position.y < waterHeight + 0.1f;
-            isRightPaddleInWater = rightPaddle.position.y < waterHeight + 0.1f;
+            if (leftPaddle)
+                isLeftPaddleInWater = leftPaddle.position.y < waterHeight + 0.1f;
+
+            if (rightPaddle)
+                isRightPaddleInWater = rightPaddle.position.y < waterHeight + 0.1f;
         }
 
         private void HandlePaddling()
         {
+            if (!leftPaddle || !rightPaddle) return;
+
             Vector3 leftPaddleDelta = leftPaddle.position - previousLeftPaddlePos;
             Vector3 rightPaddleDelta = rightPaddle.position - previousRightPaddlePos;
 
