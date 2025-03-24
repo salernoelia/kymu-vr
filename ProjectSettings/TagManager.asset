@@ -23,6 +23,7 @@ TagManager:
   - QDSUIToggleCheckboxRadio
   - QDSUITextInputField
   - RespawnableCup
+  - SlingShotAndPingPongBall
   layers:
   - Default
   - TransparentFX
