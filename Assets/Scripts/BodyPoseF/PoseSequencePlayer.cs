@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
+#if UNITY_EDITOR
 namespace BodyPoseF
 {
     /// <summary>
@@ -140,7 +141,7 @@ namespace BodyPoseF
             Debug.Log($"Playback speed set to {playbackSpeed}x");
         }
 
-#if UNITY_EDITOR
+
         /// <summary>
         /// Loads a sequence of poses from the specified folder
         /// </summary>
@@ -200,7 +201,7 @@ namespace BodyPoseF
 
             Debug.Log($"Loaded {_poseSequence.Count} poses from {Path.GetFileName(sequenceFolder)}");
         }
-#endif
+
 
         /// <summary>
         /// Coroutine for playing back the sequence of poses
@@ -409,3 +410,4 @@ namespace BodyPoseF
 #endif
 }
 
+#endif
