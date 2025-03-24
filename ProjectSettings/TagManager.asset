@@ -3,7 +3,26 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - QDSUITextSecondaryColor
+  - QDSUIToggleBorderlessButton
+  - QDSUIToggleButton
+  - QDSUISharedThemeColor
+  - QDSUIIcon
+  - QDSUITooltip
+  - QDSUIToggleSwitch
+  - QDSUIBorderlessButton
+  - QDSUISecondaryButton
+  - QDSUIAccentColor
+  - QDSUIBackplateGradient
+  - QDSUISection
+  - QDSUIPrimaryButton
+  - QDSUITextInvertedColor
+  - QDSUITextSecondaryInvertedColor
+  - QDSUIDestructiveButton
+  - QDSUIToggleCheckboxRadio
+  - QDSUITextInputField
+  - RespawnableCup
   layers:
   - Default
   - TransparentFX
@@ -11,7 +30,7 @@ TagManager:
   - HiddenMesh
   - Water
   - UI
-  - 
+  - Respawnable
   - 
   - 
   - 
