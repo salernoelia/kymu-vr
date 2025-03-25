@@ -23,6 +23,18 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Development/SinglePoseRecordingScene.unity
     guid: cc2bbd3ae6379674899c567eaf18318f
+  - enabled: 1
+    path: Assets/Scenes/BarbellScene.unity
+    guid: b198f7d3a3c726d49abe37c408ec25b6
+  - enabled: 1
+    path: Assets/Scenes/BeachScene.unity
+    guid: b7f384fe9625ec94aa4c0f855683ed15
+  - enabled: 1
+    path: Assets/Scenes/PingPongBattleScene.unity
+    guid: 055d8081059cee946bc9c6d8847dcfe6
+  - enabled: 1
+    path: Assets/Scenes/PirateScene.unity
+    guid: 6b6ed047d9ea8e64bad0a35c93b63213
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 814d34982f5e66f4386248151ad8750f, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 06acbb568d7922444b15a95ad2325006, type: 2}
