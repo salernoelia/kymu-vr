@@ -908,6 +908,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1987405788333251656, guid: f98b5a6ee43977442a53af6e19cd5ccf, type: 3}
+      propertyPath: shouldPasstroughBeActivated
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2045263375356234126, guid: f98b5a6ee43977442a53af6e19cd5ccf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1099,6 +1103,10 @@ PrefabInstance:
     - target: {fileID: 2866213576045454545, guid: f98b5a6ee43977442a53af6e19cd5ccf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.25100002
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866213576045454545, guid: f98b5a6ee43977442a53af6e19cd5ccf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.205
       objectReference: {fileID: 0}
     - target: {fileID: 2866213576045454545, guid: f98b5a6ee43977442a53af6e19cd5ccf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1387,6 +1395,10 @@ PrefabInstance:
     - target: {fileID: 3837454050498357535, guid: f98b5a6ee43977442a53af6e19cd5ccf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.296
+      objectReference: {fileID: 0}
+    - target: {fileID: 3837454050498357535, guid: f98b5a6ee43977442a53af6e19cd5ccf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3837454050498357535, guid: f98b5a6ee43977442a53af6e19cd5ccf, type: 3}
       propertyPath: m_LocalPosition.z
