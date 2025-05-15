@@ -1,4 +1,4 @@
-# Kymu VR - Pediatric Rehabilitation in Virtual Reality
+# Kymu VR
 
 ![Kymu VR Overview](/Assets/Media/Images/kymu-vr-overview.png)
 
