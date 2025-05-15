@@ -87,7 +87,7 @@ This repository contains the Unity-based Virtual Reality (VR) client for the [Ky
     *   `SceneLoader.cs` handles transitions between different exercise scenes.
     *   `Menu.prefab` provides the in-VR interface for users.
 
-## Current Status & Limitations (as of Thesis Context)
+## Current Status & Limitations
 
 *   **Work in Progress:** This is a prototype developed as part of a Bachelor's Thesis.
 *   **Accessibility:** User testing (Thesis section 5.4.1) revealed accessibility challenges for users with limited arm mobility (e.g., putting on headset, interacting with in-game items). Further refinement is needed.
