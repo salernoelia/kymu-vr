@@ -24,7 +24,7 @@ This repository contains the Unity-based Virtual Reality (VR) client for the [Ky
 *   **Data Management:**
     *   Local JSON files for exercise results.
     *   (Intended) Supabase integration for cloud data synchronization (`Assets/Scripts/Supabase/SupabaseManager.cs` and NuGet packages).
-*   **Assets:** Mix of custom-developed and downloaded 3D models, textures, and audio (see `Assets/Downloaded/` and `Assets/Models/`).
+*   **Assets:** Mix of custom-developed and downloaded 3D models (Licenses in the `Assets/Downloaded/Licenses.pdf` apply), textures, and audio (see `Assets/Downloaded/` and `Assets/Models/`).
 *   **Version Control:** Git
 
 ## Getting Started
