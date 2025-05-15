@@ -1,5 +1,7 @@
 # Kymu VR - Pediatric Rehabilitation in Virtual Reality
 
+![Kymu VR Overview](/Assets/Media/Images/kymu-vr-overview.png)
+
 This repository contains the Unity-based Virtual Reality (VR) client for the [Kymu](https://github.com/salernoelia/kymu) telerehabilitation service. Kymu is a Bachelor's Thesis project (June 2025, Zurich University of the Arts) aimed at providing a multidisciplinary telerehabilitation service for pediatric neuromuscular (NMD) physiotherapy. The VR application serves as one of the primary interfaces for children to perform guided therapeutic sessions and engaging exergames at home.
 
 ## VR Application Features
