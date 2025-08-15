@@ -10,7 +10,7 @@ This repository contains the Unity-based Virtual Reality (VR) client for the [Ky
 *   **Gamified Therapeutic Activities (Exergames):** Interactive games that incorporate therapeutic movements.
 *   **Body Pose Tracking & Validation:** Utilizes Meta Quest's body tracking capabilities (Movement SDK) to assess and guide exercise execution.
     *   **Custom Pose Definition:** Uses ScriptableObjects (`Assets/BodyPoses`) to define target poses and sequences for exercises (e.g., `ArmCenterToAngle`, `Rowing` poses).
-    *   **Real-time Feedback:** Scripts in `Assets/Scripts/BodyPoseF/` likely handle pose comparison and provide feedback.
+    *   **Real-time Feedback:** Scripts in `Assets/Scripts/BodyPoseF/` handle pose comparison and provide feedback.
 *   **Exercise Result Tracking:** Captures data on exercise performance (e.g., accuracy, duration, detected poses), saved locally (`Assets/ExerciseResults/`) and intended for synchronization with the main Kymu platform (via Supabase).
 *   **Designed for Meta Quest 3 and 3s:** Specifically developed and tested for Meta Quest VR headsets.
 *   **Audio-Visual Feedback:** Incorporates sound effects and visual cues to enhance immersion and provide performance feedback.
@@ -66,7 +66,7 @@ This repository contains the Unity-based Virtual Reality (VR) client for the [Ky
         *   `BodyPoseF/`: Core scripts for body pose definition, tracking, comparison, and exercise result saving.
         *   `Scenes/`: Scripts specific to individual scenes/games.
         *   `UI/`: Scripts for managing menus and scene loading.
-        *   `Supabase/`: (Likely) Scripts for interacting with the Supabase backend.
+        *   `Supabase/`: Scripts for interacting with the Supabase backend.
     *   **`Prefabs/`**: Reusable GameObjects, including OVR prefabs for VR rig and interaction elements.
     *   **`BodyPoses/`**: ScriptableObjects defining specific body poses and sequences for exercises.
     *   **`Models/`**, **`Materials/`**, **`Textures/`**, **`Audio/`**: Art and sound assets.
@@ -78,7 +78,7 @@ This repository contains the Unity-based Virtual Reality (VR) client for the [Ky
 
 *   **Body Pose System:**
     *   Poses are defined as `BodyPoseScriptableObject` assets.
-    *   Scripts like `BodyPoseComparerActiveStateMulti.cs` likely compare the player's live pose (from Meta Movement SDK) against these predefined poses.
+    *   Scripts like `BodyPoseComparerActiveStateMulti.cs` compare the player's live pose (from Meta Movement SDK) against these predefined poses.
     *   `SavePoseFromBody.cs` and `SavePoseSequenceFromBody.cs` suggest tools for creating new pose assets within the editor or at runtime for development.
 *   **Exercise Execution & Tracking:**
     *   Each scene represents a different exercise or exergame.
